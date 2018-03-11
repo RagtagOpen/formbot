@@ -1,0 +1,26 @@
+# serverless.yml
+
+service: formbot
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: dev
+  region: us-east-1
+
+plugins:
+  - serverless-crypt
+
+custom:
+  cryptKeyId: c4835553-f244-4ad4-96c5-f116a3619441
+
+package:
+ exclude:
+   - .env*
+
+functions:
+  app:
+    handler: index.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
