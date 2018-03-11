@@ -13,6 +13,15 @@ const createPerson = function(personInfo) {
       return reject(createError(400, `Full name required, only got ${personInfo.name}`))
     }
     // console.log("creating with", firstName, lastName, personInfo.zipCode, personInfo.email)
+    customFields = {}
+    if (personInfo.optIn && (
+        personInfo.optIn.toString().toLowerCase() === 'true' ||
+        personInfo.optIn.toString() === "1")
+      ) {
+      customFields['M4OL text opt-in'] = "1"
+    }
+
+    if (personInfo.phone) customFields.phone = personInfo.phone
     options = {
       method: 'POST',
       uri: 'https://actionnetwork.org/api/v2/people/',
@@ -21,12 +30,9 @@ const createPerson = function(personInfo) {
           family_name : lastName,
           given_name : firstName,
           postal_addresses : [ { postal_code : personInfo.zipCode }],
-          email_addresses : [ { address : personInfo.email }]
-        },
-        "add_tags": [
-          "resistbot",
-          "ragtag"
-        ]
+          email_addresses : [ { address : personInfo.email }],
+          custom_fields: customFields,
+        }
       },
       headers: {
         'OSDI-API-Token': process.env.ACTION_NETWORK_API_KEY
@@ -78,9 +84,9 @@ const signForPerson = function(personHref, formId) {
   })
 }
 
-const sign = function(personInfo, petitionId) {
+const sign = function(personInfo, formId) {
   return createPerson(personInfo)
-    .then(href => signForPerson(href, petitionId))
+    .then(href => signForPerson(href, formId))
 }
 
 module.exports = sign

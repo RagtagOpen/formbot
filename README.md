@@ -12,11 +12,16 @@ The Lambda function current requires the following values:
 - **email**
 - **zipCode**
 
+and can optionally have:
+
+- **phone**
+- **optIn** (`true` or `"true"` or `1` or `"1"`)
+
 They maybe submitted as json or as a regular form post.
 
 ## Curl example
 
-    curl -H "Content-Type: application/json" -X POST -d '{"name":"Some Name", "email":"person@example.com", "zipCode":"99999" }' https://your-api-gateway-endpoint/your-stage/your-action-network-form-id
+    curl -H "Content-Type: application/json" -X POST -d '{"name":"Some Name", "email":"person@example.com", "zipCode":"99999", "phone":"415-555-1212", "optIn": true }' https://your-api-gateway-endpoint/your-stage/your-action-network-form-id
 
 ## HTML form example
 
@@ -39,3 +44,7 @@ To encrypt your api key, run the following:
     serverless encrypt -n ACTION_NETWORK_API_KEY -t "your-key-goes-here" --save
 
 The resulting `.serverless-secret.json` file is safe to check in.
+
+## TODO
+- [ ] add field validation
+- [ ] make custom fields a configuration option (currently "optIn" sets a `M4OL text opt-in` custom field)

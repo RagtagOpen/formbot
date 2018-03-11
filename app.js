@@ -27,12 +27,11 @@ app.get('/', function (req, res) {
   res.send('Hello World!')
 })
 
-app.post('/sign/:petitionId', function(req, res, next) {
-  const { name, email, zipCode } = req.body
-  console.log(`Signing petition for ${name} ${email} ${zipCode}`)
+app.post('/sign/:formId', function(req, res, next) {
+  console.log(`Signing petition for ${req.body}`)
   getSecrets()
   .then(() => {
-    sign({ name, email, zipCode}, req.params.petitionId)
+    sign(req.body, req.params.formId)
       .then(() => {
         res.sendStatus(201)
       })

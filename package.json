@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
-    "test-signup": "curl -w \"\nstatus: %{http_code}\n\" -H \"Content-Type: application/json\" -X POST -d '{\"name\":\"Jesse Kriss\", \"email\":\"jesse@ragtag.org\", \"zipCode\":\"94110\" }' http://localhost:3000/sign/26a49c65-70ce-48d7-9932-202b874c9912",
-    "test-signup-dev": "curl -w \"\nstatus: %{http_code}\n\" -H \"Content-Type: application/json\" -X POST -d '{\"name\":\"Jesse Kriss\", \"email\":\"jesse@ragtag.org\", \"zipCode\":\"94110\" }' https://mmr70jgiph.execute-api.us-east-1.amazonaws.com/dev/sign/26a49c65-70ce-48d7-9932-202b874c9912",
-    "test-signup-prod": "curl -w \"\nstatus: %{http_code}\n\" -H \"Content-Type: application/json\" -X POST -d '{\"name\":\"Jesse Kriss\", \"email\":\"jesse@ragtag.org\", \"zipCode\":\"94110\" }' https://6bzimew51k.execute-api.us-east-1.amazonaws.com/prod/sign/26a49c65-70ce-48d7-9932-202b874c9912"
+    "test-signup": "curl -w \"\nstatus: %{http_code}\n\" -H \"Content-Type: application/json\" -X POST -d '{\"name\":\"Jesse Kriss\", \"email\":\"jesse@ragtag.org\", \"zipCode\":\"94110\", \"phone\": \"415-555-1212\", \"optIn\": true }' http://localhost:3000/sign/26a49c65-70ce-48d7-9932-202b874c9912",
+    "test-signup-dev": "curl -w \"\nstatus: %{http_code}\n\" -H \"Content-Type: application/json\" -X POST -d '{\"name\":\"Jesse Kriss\", \"email\":\"jesse@ragtag.org\", \"zipCode\":\"94110\", \"phone\": \"415-555-1212\", \"optIn\": true }' https://mmr70jgiph.execute-api.us-east-1.amazonaws.com/dev/sign/26a49c65-70ce-48d7-9932-202b874c9912",
+    "test-signup-prod": "curl -w \"\nstatus: %{http_code}\n\" -H \"Content-Type: application/json\" -X POST -d '{\"name\":\"Jesse Kriss\", \"email\":\"jesse@ragtag.org\", \"zipCode\":\"94110\", \"phone\": \"415-555-1212\", \"optIn\": true }' https://6bzimew51k.execute-api.us-east-1.amazonaws.com/prod/sign/26a49c65-70ce-48d7-9932-202b874c9912"
   },
   "author": "Jesse Kriss <jesse@jklabs.net>",
   "dependencies": {
