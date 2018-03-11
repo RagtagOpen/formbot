@@ -47,4 +47,4 @@ The resulting `.serverless-secret.json` file is safe to check in.
 
 ## TODO
 - [ ] add field validation
-- [ ] make custom fields a configuration option (currently "optIn" sets a `M4OL text opt-in` custom field)
+- [ ] make custom fields a configuration option (currently "optIn" sets a `M4OL text opt-in` custom field, and `resistbot` is set to "1")

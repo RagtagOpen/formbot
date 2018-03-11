@@ -13,7 +13,9 @@ const createPerson = function(personInfo) {
       return reject(createError(400, `Full name required, only got ${personInfo.name}`))
     }
     // console.log("creating with", firstName, lastName, personInfo.zipCode, personInfo.email)
-    customFields = {}
+    customFields = {
+      "resistbot": "1"
+    }
     if (personInfo.optIn && (
         personInfo.optIn.toString().toLowerCase() === 'true' ||
         personInfo.optIn.toString() === "1")
