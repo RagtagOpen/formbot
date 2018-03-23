@@ -1,18 +1,27 @@
 const rp = require('request-promise');
 const createError = require('http-errors');
 
+const validate = function(personInfo) {
+  if (!personInfo.name || !personInfo.email || !personInfo.zipCode) {
+    return {
+      error: createError(400, "name, email, and zipCode are all required")
+    }
+  }
+  let nameParts = personInfo.name.split(' ')
+  const firstName = nameParts.shift()
+  const lastName = nameParts.join(' ')
+  if (!lastName) {
+    return {
+      error: createError(400, `Full name required, only got ${personInfo.name}`)
+    }
+  }
+  return { success: true, firstName, lastName }
+}
+
 const createPerson = function(personInfo) {
   return new Promise((resolve, reject) => {
-    if (!personInfo.name || !personInfo.email || !personInfo.zipCode) {
-      return reject(createError(400, "name, email, and zipCode are all required"))
-    }
-    let nameParts = personInfo.name.split(' ')
-    const firstName = nameParts.shift()
-    const lastName = nameParts.join(' ')
-    if (!lastName) {
-      return reject(createError(400, `Full name required, only got ${personInfo.name}`))
-    }
-    // console.log("creating with", firstName, lastName, personInfo.zipCode, personInfo.email)
+    const validationResult = validate(personInfo)
+    if (validationResult.error) return reject(validationResult.error)
     customFields = {
       "resistbot": "1"
     }
@@ -29,8 +38,8 @@ const createPerson = function(personInfo) {
       uri: 'https://actionnetwork.org/api/v2/people/',
       body: {
         person : {
-          family_name : lastName,
-          given_name : firstName,
+          family_name : validationResult.lastName,
+          given_name : validationResult.firstName,
           postal_addresses : [ { postal_code : personInfo.zipCode }],
           email_addresses : [ { address : personInfo.email }],
           custom_fields: customFields,
@@ -93,4 +102,7 @@ const sign = function(personInfo, formId) {
     .then(href => signForPerson(href, formId))
 }
 
-module.exports = sign
+module.exports = {
+  sign,
+  validate
+}

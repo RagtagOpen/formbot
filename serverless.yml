@@ -31,7 +31,7 @@ functions:
     environment:
       BUCKET: ${self:custom.bucket}
       KEY_PREFIX: ${opt:stage}/
-      SOFT_TIMEOUT: 1000
+      PATH_PREFIX: /${opt:stage}
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'
