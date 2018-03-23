@@ -39,16 +39,17 @@ const createPerson = function(personInfo) {
       headers: {
         'OSDI-API-Token': process.env.ACTION_NETWORK_API_KEY
       },
-      json: true
+      json: true,
+      resolveWithFullResponse: true
     };
     // console.log("posting with options:", options)
     rp(options)
-      .then(body => {
-        // console.log("got response:", body)
-        resolve(body._links.self.href)
+      .then(res => {
+        console.log("got person response:", res.statusCode)
+        resolve(res.body._links.self.href)
       })
       .catch(err => {
-        console.log("error posting", err)
+        console.log("error posting")
         reject(err)
       })
   })
@@ -72,11 +73,12 @@ const signForPerson = function(personHref, formId) {
       headers: {
         'OSDI-API-Token': process.env.ACTION_NETWORK_API_KEY
       },
-      json: true
+      json: true,
+      resolveWithFullResponse: true
     };
     rp(options)
-      .then(body => {
-        console.log("added submission to form:", body)
+      .then(res => {
+        console.log("added submission to form:", res.body)
         resolve()
       })
       .catch(err => {

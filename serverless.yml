@@ -2,18 +2,24 @@
 
 service: formbot
 
+custom:
+  bucket: formbot-errors
+  cryptKeyId: c4835553-f244-4ad4-96c5-f116a3619441
+
 provider:
   name: aws
   runtime: nodejs6.10
   stage: dev
   region: us-east-1
   timeout: 20 # seconds
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+      Resource: "arn:aws:s3:::${self:custom.bucket}/*"
 
 plugins:
   - serverless-crypt
-
-custom:
-  cryptKeyId: c4835553-f244-4ad4-96c5-f116a3619441
 
 package:
  exclude:
@@ -22,6 +28,10 @@ package:
 functions:
   app:
     handler: index.handler
+    environment:
+      BUCKET: ${self:custom.bucket}
+      KEY_PREFIX: ${opt:stage}/
+      SOFT_TIMEOUT: 1000
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'
