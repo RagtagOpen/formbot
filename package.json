@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "BUCKET=formbot-errors nodemon server.js",
+    "start": "BUCKET=formbot-errors server.js",
     "test-signup": "curl -w \"\nstatus: %{http_code}\n\" -H \"Content-Type: application/json\" -X POST -d '{\"name\":\"Jesse Kriss\", \"email\":\"jesse@ragtag.org\", \"zipCode\":\"94110\", \"phone\": \"415-555-1212\", \"optIn\": true }' http://localhost:3000/sign/26a49c65-70ce-48d7-9932-202b874c9912",
     "test-signup-error": "curl -w \"\nstatus: %{http_code}\n\" -H \"Content-Type: application/json\" -X POST -d '{\"name\":\"j\", \"email\":\"jesse@ragtag.org\", \"zipCode\":\"94110\", \"phone\": \"415-555-1212\", \"optIn\": true }' http://localhost:3000/sign/26a49c65-70ce-48d7-9932-202b874c9912",
     "test-signup-wait": "curl -w \"\nstatus: %{http_code}\n\" -H \"Content-Type: application/json\" -X POST -d '{\"name\":\"Jesse Kriss\", \"email\":\"jesse@ragtag.org\", \"zipCode\":\"94110\", \"phone\": \"415-555-1212\", \"optIn\": true }' http://localhost:3000/sign/26a49c65-70ce-48d7-9932-202b874c9912/wait",
@@ -21,13 +21,12 @@
     "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "http-errors": "^1.6.2",
-    "request": "^2.83.0",
+    "request": "^2.88.0",
     "request-promise": "^4.2.2",
     "serverless-crypt": "0.0.4",
     "serverless-http": "^1.5.3"
   },
   "devDependencies": {
-    "nodemon": "^1.17.1",
-    "serverless": "^1.26.1"
+    "serverless": "^1.37.0"
   }
 }
