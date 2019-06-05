@@ -27,6 +27,6 @@
     "serverless-http": "^2.0.1"
   },
   "devDependencies": {
-    "serverless": "^1.42.3"
+    "serverless": "^1.44.1"
   }
 }
