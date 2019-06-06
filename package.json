@@ -23,7 +23,7 @@
     "http-errors": "^1.7.2",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
-    "serverless-crypt": "0.0.4",
+    "serverless-crypt": "^0.0.4",
     "serverless-http": "^2.0.1"
   },
   "devDependencies": {
